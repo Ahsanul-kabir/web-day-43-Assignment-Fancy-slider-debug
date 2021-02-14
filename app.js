@@ -55,14 +55,14 @@ var timer;
 const createSlider = () => {
     // check slider image length
     if (sliders.length < 2) {
-        alert('Select at least 2 image.');
+        alert('Hey dude, Select at least 2 image!!!');
         return;
     }
     // crate slider previous next area
     sliderContainer.innerHTML = '';
     const prevNext = document.createElement('div');
     prevNext.className = 'prev-next d-flex w-100 justify-content-between align-items-center';
-    prevNext.innerHTML = ` 
+    prevNext.innerHTML = `
   <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
   <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
   `;
@@ -81,7 +81,7 @@ const createSlider = () => {
         sliderContainer.appendChild(item);
     });
     changeSlide(0);
-    timer = setInterval(function () {
+    timer = setInterval(function() {
         slideIndex++;
         changeSlide(slideIndex);
     }, duration);
@@ -112,7 +112,7 @@ const changeSlide = index => {
     items[index].style.display = 'block';
 };
 
-
+// work for display image
 const displayImage = () => {
     document.querySelector('.main').style.display = 'none';
     clearInterval(timer);
@@ -121,26 +121,28 @@ const displayImage = () => {
     toggleSpinner();
 };
 
-searchBtn.addEventListener('click', function () {
+searchBtn.addEventListener('click', function() {
     displayImage();
 });
 
-
+// work for ENTER key
 search.addEventListener("keypress", function(event) {
     if (event.key == 'Enter') {
         displayImage();
     }
 });
 
-sliderBtn.addEventListener('click', function () {
+// work for duration
+sliderBtn.addEventListener('click', function() {
     const duration = document.getElementById('duration').value || 1000;
-    if (duration < 0) {
-        alert('Negative time value is not allowed !!!');
+    if (duration <= 0) {
+        alert('ZERO and NEGATIVE duration is not allowed !!!');
     } else {
         createSlider();
     }
 });
 
+// work for Spinner toggle
 const toggleSpinner = () => {
     const spinner = document.getElementById('loading-spinner').classList;
     const imagesArea = document.querySelector('.images').classList;
